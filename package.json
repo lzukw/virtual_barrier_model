@@ -1,0 +1,26 @@
+{
+  "name": "virtual_barrier_model",
+  "version": "1.0.0",
+  "description": "Virtual Barrier Model used for teaching PLC-programming",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lzukw/virtual_barrier_model.git"
+  },
+  "author": "Wolfgang Zukrigl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lzukw/virtual_barrier_model/issues"
+  },
+  "homepage": "https://github.com/lzukw/virtual_barrier_model#readme",
+  "dependencies": {
+    "modbus-serial": "^8.0.3"
+  },
+  "devDependencies": {
+    "electron": "^13.1.7"
+  }
+}

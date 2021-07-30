@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+
+  <title>Virtual Barrier-Control model</title>
+</head>
+<body>
+  <div>
+    <object id="svg-object" data="virtualModel.svg" type="image/svg+xml"></object>
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td><label>Entrance:</label></td>
+        <td><button id="btn_put_car_entrance">Put Car</button></td>
+        <td><button id="btn_card_entrance">Card</button></td>
+        <td>
+          <label for="sld_car_pos_entrance">Car Poition</label>
+          <input type="range" min="0" max="100" value="0" class="slider" id="sld_car_pos_entrance">
+        </td>
+        <td><button id="btn_remove_car_entrance">Park Car</button></td>
+      </tr>
+      <tr>
+        <td><label>Exit:</label></td>
+        <td><button id="btn_put_car_exit">Put Car</button></td>
+        <td><button id="btn_card_exit">Card</button></td>
+        <td>
+          <label for="sld_car_pos_exit">Car Poition</label>
+          <input type="range" min="0" max="100" value="0" class="slider" id="sld_car_pos_exit">
+        </td>
+        <td><button id="btn_remove_car_exit">Car leaves</button></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <label for="chk_key_switch">Key switch:</label>
+    <input type="checkbox" id="chk_key_switch">
+    <label for="chk_gas_alarm">Gas alarm:</label>
+    <input type="checkbox" id="chk_gas_alarm">
+    <button id="btn_cb_plus">Correction Plus</button>
+    <button id="btn_cb_minus">Correction Minus</button>
+  </div>
+  <script src="virtualModel.js"></script>
+</body>
+</html>
