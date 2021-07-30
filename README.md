@@ -2,7 +2,9 @@
 
 When teaching PLC-programming to students, normally my students use a PLC connected to a hardware-model consisting of two barriers. This is ok for teaching small groups of students, but for a larger group there are not enough hardware-models.
 
-This electron-app is a virtual barrier-model, that simulates the real hardware.model. Instead of using PLC-inputs/outputs it is "connected" via modbus-tcp to a SOFT-PLC. CoDeSys and Beremiz can be used for PLC-Programming, since they support modbus.
+This electron-app is a virtual barrier-model, that simulates the real hardware-model. Instead of using PLC-inputs/outputs it is "connected" via modbus-tcp to a SOFT-PLC. CoDeSys and Beremiz can be used for PLC-Programming, since they support modbus.
+
+To get an idea, how this app looks like, just have a look at `virtualModel.svg`.
 
 # Connecting to the virtual barrier model
 
@@ -26,4 +28,4 @@ npm start
 
 # Deploying
 
-TODO
+TODO ...The preload-script seems to cause problems
