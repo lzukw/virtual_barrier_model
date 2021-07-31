@@ -1,7 +1,7 @@
 # Virtuelles Schrankenmodell
 
 ## Benutzung des fertigen Programms
-Mit einem von Schüler*innen zu entwickelnden SPS-Programm, das anstelle digitaler Ein-/Ausgänge einen modbus-client benutzt, kann das virtuelle Schrankenmodell gesteuert werden. Das virtuelle Schrankenmodell beinhaltet einen modbus-Server. Der modbus-client kann coils im modbus-Server setzen (das entspricht dem Setzen von digitalen SPS-Ausgängen, die dann ein reales Modell ansteuern). Der modbus-Client kann die Zusände der discrete-inputs des modbus-Servers lesen. (Das entspricht dem Einlesen digitaler SPS-Eingänge bei einem realen Modell).
+Mit einem von Schüler:innen zu entwickelnden SPS-Programm, das anstelle digitaler Ein-/Ausgänge einen modbus-client benutzt, kann das virtuelle Schrankenmodell gesteuert werden. Das virtuelle Schrankenmodell beinhaltet einen modbus-Server. Der modbus-client kann coils im modbus-Server setzen (das entspricht dem Setzen von digitalen SPS-Ausgängen, die dann ein reales Modell ansteuern). Der modbus-Client kann die Zusände der discrete-inputs des modbus-Servers lesen. (Das entspricht dem Einlesen digitaler SPS-Eingänge bei einem realen Modell).
 
 Das ferige Programm startet in einem von Elektron gestarteten Fenster (Browser-Window) und zeigt das virtuelle Schrankenmodell als (veränderbare) svg-Zeichnung an. In dieser Zeichnung sind auch die Zustände der verwendeten Modbus-coils (SPS-Ausgänge) und der discrete-inputs (SPS-Eingänge) mittels "LEDs" sichtbar. Die mit einem realen Modell durchführbaren Voränge werden im virutellen Schrankenmodell mit Buttons und Slidern realisiert:
 
@@ -64,9 +64,9 @@ Bei `yarn init` wurden folgene Angaben gemacht, bei allen anderen Fragen wurden 
 
 npm-Paket modbus-server installiert auch eine Menge an Abhängigkeiten (siehe Ordner node-modules, bzw. Datei yarn.lock, oder shell-Kommando `yarn list`)
 
-Nun kann die App mit `yarn start` im Terminal gestartet werden.
+Nun kann die App mit `yarn start` im Terminal gestartet werden (macht aber noch nichts).
 
-Debugging mit VSCode: Launch-Konfiguration hinzufügen: Menü Run >> Add Configuration >> Node.js. Dann in der Datei .vscode/launch.json den Button "Add Configuration" >> "Node.js: Electron Main". Man kann nun die alte Launsch-Configuration löschen. Danach startet bei F5 jedes Mal die Electron-App. Allerdings kann man nur main.js debuggen, was nicht allzu viel bringt. `preload.js` und die Client-App können nur mit den Dev-Tools des BrowserWindow gedebuggt werden.
+Debugging mit VSCode: Launch-Konfiguration hinzufügen: Menü Run >> Add Configuration >> Node.js. Dann in der Datei .vscode/launch.json den Button "Add Configuration" >> "Node.js: Electron Main". Man kann nun die alte Launch-Configuration (mit "name": "Launch Program") löschen. Danach startet bei F5 jedes Mal die Electron-App. Allerdings kann man nur main.js debuggen, was nicht allzu viel bringt. `preload.js` und die Client-App können nur mit den Dev-Tools des BrowserWindow gedebuggt werden. Dadurch wird die App aber nicht als electron-forge-App, sondern als normale electron-App gestartet.
 
 ## main.js
 
@@ -95,10 +95,11 @@ Mit diesen Funktionen kann die Client-App die Werte in den Modbus-Tabellen ausle
 
 Der bisherige Teil (`main.js` und `preload.js`) ist so allgemein gehalten, dass auch andere virtuelle SPS-Modelle, z.B. das Schleusenmodell realisiert werden können, und dazu "nur" eine neue Client-Anwendung geschrieben werden muss.
 
+TODO: Es ist noch nicht klar, wie man `prelaod.js` debuggen kann.
 
 ### Test des Modbus-Servers.
 
-An dieser Stelle erfolgte bereits ein Test des Modbus-Servers mit python (apt- bzw. dnf-Paket python3-pymodbus muss installiert sein):
+An dieser Stelle erfolgte bereits ein Test des Modbus-Servers mit python (apt- bzw. dnf-Paket python3-pymodbus muss installiert sein). Zuerst eine leere Datei `index.html` anlegen, damit die electron-App starten kann.
 
 ```python
 from pymodbus.client.sync import ModbusTcpClient
@@ -121,7 +122,7 @@ resp.getBit(0) # --> True
 resp.getBit(3) # --> False
 ```
 
-Im node.js-Terminal kann man die Zugriffe auf die internen Tabellen beobachten, wenn die Umgebungsvariable `MODBUS_DEBUG` auf true gesetzt ist. 
+Wenn man die App nicht per `yarn start`, sonder per per node main.js startet, kann man im node.js-Terminal kann man die Zugriffe auf die internen Tabellen beobachten, wenn die Umgebungsvariable `MODBUS_DEBUG` auf true gesetzt ist. EDIT: Das funktioniert nicht mehr mit Electron, da die laufenden Ausgaben des Preload-Scritps von den Chrome-Dev-Tools versteckt werden. Es kommt nur die Anzeige "hidden" und die Anzahl der versteckten Messages.
 
 
 ## Client-Anwendung - index.html
@@ -249,12 +250,7 @@ Im `window.onload()`-Handler wird die svg-Zeichnung durch Aufruf aller draw-Funk
 
 ...siehe 
 - (Elektron Quickstart - package and distribute your Application)[https://www.electronjs.org/docs/tutorial/quick-start#package-and-distribute-your-application]
-- 
+- (Electron Forge - Getting started)[https://www.electronforge.io/]
+- (Electron Forge - Import Existing PRoject)[https://www.electronforge.io/import-existing-project]
 
-
-
-```
-yarn run make
-```
-
-Im `out`-Folder sind die build-Ergebnisse
+Details: siehe `README.mnd` - Deploying
