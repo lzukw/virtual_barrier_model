@@ -3,24 +3,51 @@
   "version": "1.0.0",
   "description": "Virtual Barrier Model used for teaching PLC-programming",
   "main": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lzukw/virtual_barrier_model.git"
-  },
-  "author": "Wolfgang Zukrigl",
+  "repository": "https://github.com/lzukw/virtual_barrier_model.git",
+  "author": "lzukw <zukw@litec.ac.at>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/lzukw/virtual_barrier_model/issues"
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.59",
+    "@electron-forge/maker-deb": "^6.0.0-beta.59",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.59",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.59",
+    "@electron-forge/maker-zip": "^6.0.0-beta.59",
+    "electron": "13.1.7"
   },
-  "homepage": "https://github.com/lzukw/virtual_barrier_model#readme",
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
     "modbus-serial": "^8.0.3"
   },
-  "devDependencies": {
-    "electron": "^13.1.7"
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "virtual_barrier_model"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin", "linux"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }

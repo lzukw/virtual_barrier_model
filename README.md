@@ -22,10 +22,12 @@ With node.js installed, this program can be installed and run using the followin
 ```
 git clone https://github.com/lzukw/virtual_barrier_model.git
 cd virtual_barrier_model
-npm install
-npm start
+yarn install
+yarn start
 ```
 
 # Deploying
 
-TODO ...The preload-script seems to cause problems
+Edit `package.json` and remove not used makers in the section "config" > "forge" > makers. For example on a Fedora-System remove `"@electron-forge/maker-deb"`.
+
+Then run `yarn run make` and find the build-results in the `out`-directory.
