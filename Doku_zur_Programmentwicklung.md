@@ -52,25 +52,19 @@ Zuerst wurde auf github.com/lzukw ein neues Repository erstellt mit einem .gitig
 
 ```
 touch main.js
-npm init
-npm install modbus-serial
-npm install --save-dev electron
+yarn init
+yarn add modbus-serial
+yarn add --dev @electron-forge/cli
+yarn electron-forge import
 ```
 
-Bei `npm init` wurden folgene Angaben gemacht, bei allen anderen Fragen wurden die Default-Werte gelassen:
+Bei `yarn init` wurden folgene Angaben gemacht, bei allen anderen Fragen wurden die Default-Werte gelassen:
 - description: Virtual Barrier Model used for teaching PLC-programming
-- entry point: main.js
-- Licenxs: MIT
-- author: Wolfgang Zukrigl
+- Entry point: main.js
 
-npm-Paket modbus-server installiert auch eine Menge an Abhängigkeiten (siehe Ordner node-modules, bzw. Datei package-lock.json, oder shell-Kommando `npm list`)
+npm-Paket modbus-server installiert auch eine Menge an Abhängigkeiten (siehe Ordner node-modules, bzw. Datei yarn.lock, oder shell-Kommando `yarn list`)
 
-In der Datei package.json wird im Bereich `scripts` folgender Eintrag hinzugefügt:
-```JSON
-  "start": "electron ."
-```
-
-Nun kann die App mit `npm start` im Terminal gestartet werden.
+Nun kann die App mit `yarn start` im Terminal gestartet werden.
 
 Debugging mit VSCode: Launch-Konfiguration hinzufügen: Menü Run >> Add Configuration >> Node.js. Dann in der Datei .vscode/launch.json den Button "Add Configuration" >> "Node.js: Electron Main". Man kann nun die alte Launsch-Configuration löschen. Danach startet bei F5 jedes Mal die Electron-App. Allerdings kann man nur main.js debuggen, was nicht allzu viel bringt. `preload.js` und die Client-App können nur mit den Dev-Tools des BrowserWindow gedebuggt werden.
 
@@ -82,7 +76,7 @@ Es wird das Standard-Template aus der "Erste-Schritte-Doku" bzw. aus Electron-Fi
 
 ## Modbus-Server - preload.js
 
-Die vier Modbus-Tabllen, die ein Modbus-Server intern speichert, werden in der Datei `preload.js` in einem globalen Objekt `modbusTables` gespeichert. Es gibt Tabellen für Discrete Inputs, Coils, Input Registers und Holding Registers. Alle Tabellen haben standardmäßig 32 Einträge. Dieser Wert ist über die Umgebungsvariable `MODBUS_TABLE_LENGTH` konfigurierbar. Es sollten aber eigentlich für realistische Schüler*innen-Projekte 32 Einträge mehr als genung sein.
+Die vier Modbus-Tabllen, die ein Modbus-Server intern speichert, werden in der Datei `preload.js` in einem globalen Objekt `modbusTables` gespeichert. Es gibt Tabellen für Discrete Inputs, Coils, Input Registers und Holding Registers. Alle Tabellen haben standardmäßig 32 Einträge. Dieser Wert ist über die Umgebungsvariable `MODBUS_TABLE_LENGTH` konfigurierbar. Es sollten aber eigentlich für realistische Schüler:innen-Projekte 32 Einträge mehr als genung sein.
 
 Der Modbus-Server lauscht auf den Port, der in der Umgebungsvariablen `MODBUS_PORT` beim Start von node gespeichert ist. Gibt es diese Umgebungsvariable nicht, so wird standardmäßig Port 1502 verwendet (Der genormte Port 502 würde Administrator-Rechte erfordern).
 
@@ -253,12 +247,14 @@ Im `window.onload()`-Handler wird die svg-Zeichnung durch Aufruf aller draw-Funk
 
 # Project ausrollen
 
-...siehe (Elektron Quickstart - package and distribute your Application)[https://www.electronjs.org/docs/tutorial/quick-start#package-and-distribute-your-application].
+...siehe 
+- (Elektron Quickstart - package and distribute your Application)[https://www.electronjs.org/docs/tutorial/quick-start#package-and-distribute-your-application]
+- 
+
+
 
 ```
-npm install --save-dev @electron-forge/cli
-npx electron-forge import
-npm run make
+yarn run make
 ```
 
-Im `out`-Folder ist die .zip-Datei mit der Anwendung
+Im `out`-Folder sind die build-Ergebnisse
