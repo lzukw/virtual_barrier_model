@@ -28,6 +28,6 @@ yarn start
 
 # Deploying
 
-Edit `package.json` and remove not uses makers in the section "config" > "forge" > makers. For example on a Fedora-System remove `"@electron-forge/maker-deb"`.
+Edit `package.json` and remove not used makers in the section "config" > "forge" > makers. For example on a Fedora-System remove `"@electron-forge/maker-deb"`.
 
 Then run `yarn run make` and find the build-results in the `out`-directory.
